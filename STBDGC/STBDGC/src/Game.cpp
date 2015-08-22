@@ -41,9 +41,13 @@ Game::Game() :
 
 	smgr=root->createSceneManager("OctreeSceneManager");
 	smgr->setShadowTechnique(Ogre::ShadowTechnique::SHADOWTYPE_STENCIL_ADDITIVE);
-	camera=smgr->createCamera("Main_Cam");
-	camera->setAutoAspectRatio(true);
-	viewport=window->addViewport(camera);
+	gamePhysics = new GamePhysics(smgr->getRootSceneNode());
+
+	cameraObj=smgr->createCamera("Main_Cam");
+	cameraObj->setAutoAspectRatio(true);
+	viewport=window->addViewport(cameraObj);
+	camera = smgr->getRootSceneNode()->createChildSceneNode();
+	//camera->attachObject(cameraObj);
 	viewport->setBackgroundColour(Ogre::ColourValue::Blue);
 	gameRunning=true;
 
@@ -53,26 +57,54 @@ Game::Game() :
 
 
 	staticGeometry = smgr->getRootSceneNode()->createChildSceneNode();
-	staticGeometry->attachObject(smgr->createEntity("floor_walls.mesh"));
-	staticGeometry->attachObject(smgr->createEntity("bed_struct.mesh"));
-	staticGeometry->attachObject(smgr->createEntity("bookshelf.mesh"));
-	staticGeometry->attachObject(smgr->createEntity("mattress.mesh"));
-	staticGeometry->attachObject(smgr->createEntity("nightstand.mesh"));
-	staticGeometry->attachObject(smgr->createEntity("nightstand.drawer.mesh"));
-	staticGeometry->attachObject(smgr->createEntity("toybox.mesh"));
+
+	Ogre::SceneNode* tmpNode; Ogre::Entity* tmpEntity;
+	(tmpNode = staticGeometry->createChildSceneNode())->attachObject(tmpEntity = smgr->createEntity("floor_walls.mesh"));
+	createStaticRigidBody(tmpNode,tmpEntity);
+	(tmpNode = staticGeometry->createChildSceneNode())->attachObject(tmpEntity = smgr->createEntity("bed_struct.mesh"));
+	createStaticRigidBody(tmpNode,tmpEntity);
+	(tmpNode = staticGeometry->createChildSceneNode())->attachObject(tmpEntity = smgr->createEntity("bookshelf.mesh"));
+	createStaticRigidBody(tmpNode,tmpEntity);
+	(tmpNode = staticGeometry->createChildSceneNode())->attachObject(tmpEntity = smgr->createEntity("mattress.mesh"));
+	createStaticRigidBody(tmpNode,tmpEntity);
+	(tmpNode = staticGeometry->createChildSceneNode())->attachObject(tmpEntity = smgr->createEntity("nightstand.mesh"));
+	createStaticRigidBody(tmpNode,tmpEntity);
+	(tmpNode = staticGeometry->createChildSceneNode())->attachObject(tmpEntity = smgr->createEntity("nightstand.drawer.mesh"));
+	createStaticRigidBody(tmpNode,tmpEntity);
+	(tmpNode = staticGeometry->createChildSceneNode())->attachObject(tmpEntity = smgr->createEntity("toybox.mesh"));
+	createStaticRigidBody(tmpNode,tmpEntity);
+
 
 	monster->setPlanarCoordinates(Ogre::Vector2(1.75, -1));
 
-	camera->setPosition(monster->getPlanarCoodinates().x, monster->getHeight(), monster->getPlanarCoodinates().y);
-	camera->lookAt(0,monster->getHeight(),-1);
-	camera->setNearClipDistance(0.0001);
-	camera->setFarClipDistance(10000);
+	camera->setPosition(monster->getPlanarCoodinates().x, monster->getHeight()+.1f, monster->getPlanarCoodinates().y);
+	//cameraObj->lookAt(0,monster->getHeight()+.1f,-1);
+	cameraObj->setNearClipDistance(0.0001);
+	cameraObj->setFarClipDistance(10000);
 
 	roomLight =  smgr->createLight();
 	roomLight->setPosition(0,1,0);
 	roomLight->setDiffuseColour(off);
 	
 	lastTimeSinceStartup = root->getTimer()->getMilliseconds();
+
+	btCollisionShape* monsterCapsuleShape = new btCapsuleShape(0.125f, monster->getHeight() - 2*0.125f);
+	BtOgre::RigidBodyState *state = new BtOgre::RigidBodyState(camera);
+	btVector3 inertia;
+	monsterCapsuleShape->calculateLocalInertia(100,inertia);
+	monsterCapsule = new btRigidBody(100,state,monsterCapsuleShape,inertia);
+	gamePhysics->getWorld()->addRigidBody(monsterCapsule);
+
+}
+
+void Game::createStaticRigidBody(Ogre::SceneNode* node, Ogre::Entity* entity)
+{
+	BtOgre::StaticMeshToShapeConverter converter(entity);
+	btTriangleMeshShape* shape = converter.createTrimesh();
+	btVector3 inertia(0,0,0);
+	BtOgre::RigidBodyState* state = new BtOgre::RigidBodyState(node);
+	btRigidBody* body = new btRigidBody(0, state, shape, inertia);
+	gamePhysics->getWorld()->addRigidBody(body);
 }
 
 Game::~Game()
@@ -97,6 +129,8 @@ void Game::update()
 {
 	refreshTimer();
 
+	monsterCapsule->activate();
+
 	Ogre::WindowEventUtilities::messagePump();
 
 	gameInputManager->capture();
@@ -104,42 +138,64 @@ void Game::update()
 	mouseX = gameInputManager->getMouse()->getMouseState().X.rel;
 	mouseY = gameInputManager->getMouse()->getMouseState().Y.rel;
 
-	camera->yaw(-Ogre::Degree(mouseX*mouseSpeed*sec(deltaTime)));
-	camera->pitch(-Ogre::Degree(mouseY*mouseSpeed*sec(deltaTime)));
+	cameraObj->yaw(-Ogre::Degree(mouseX*mouseSpeed*sec(deltaTime)));
+	cameraObj->pitch(-Ogre::Degree(mouseY*mouseSpeed*sec(deltaTime)));
 
 	OIS::Keyboard* keyboard = gameInputManager->getKeyboard();
-	Ogre::Vector3 translate;
+	Ogre::Vector3 translate(Ogre::Vector3::ZERO);
 	bool displacement(false);
-	if(keyboard->isKeyDown(OIS::KC_W) || keyboard->isKeyDown(OIS::KC_UP))
+
+	if(keyboard->isKeyDown(OIS::KC_W))
 	{
 		displacement = true;
-		translate += camera->getOrientation() * Ogre::Vector3(0,0,-1);
+		translate.z -=1;
 	}
-	if(keyboard->isKeyDown(OIS::KC_A) || keyboard->isKeyDown(OIS::KC_LEFT))
-	{		
+		
+	if(keyboard->isKeyDown(OIS::KC_A))
+	{
 		displacement = true;
-		translate += camera->getOrientation() * Ogre::Vector3(-1,0,0);
-	}
-	if(keyboard->isKeyDown(OIS::KC_S) || keyboard->isKeyDown(OIS::KC_DOWN))
-	{		
-		displacement = true;
-		translate += camera->getOrientation() * Ogre::Vector3(0,0,1);
-	}
-	if(keyboard->isKeyDown(OIS::KC_D) || keyboard->isKeyDown(OIS::KC_RIGHT))
-	{		
-		displacement = true;
-		translate += camera->getOrientation() * Ogre::Vector3(1,0,0);
-	}
-	
-	if(displacement)
-		translate.normalise();
-	translate *= sec(deltaTime)*walkSpeed;
+		translate.x -=1;
 
-	monster->setPlanarCoordinates(monster->getPlanarCoodinates() + Ogre::Vector2(translate.x, translate.z));
-	camera->setPosition(monster->getPlanarCoodinates().x, monster->getHeight(), monster->getPlanarCoodinates().y);
+	}	
+	
+	if(keyboard->isKeyDown(OIS::KC_S))
+	{
+		displacement = true;
+		translate.z +=1;
+	}	
+	
+	if(keyboard->isKeyDown(OIS::KC_D))
+	{
+		displacement = true;
+		translate.x +=1;
+	}
+
+	translate = cameraObj->getOrientation()*translate;
+	translate.normalise();
+	btTransform transform = monsterCapsule->getCenterOfMassTransform();
+	Ogre::Quaternion fixedOrient(Ogre::Quaternion::IDENTITY);
+	transform.setRotation(btQuaternion(fixedOrient.x, fixedOrient.y, fixedOrient.z, fixedOrient.w));
+	monsterCapsule->setCenterOfMassTransform(transform);
+
+	btVector3 currentVelocity = monsterCapsule->getLinearVelocity();
+	if(!displacement)
+	{
+		monsterCapsule->setLinearVelocity(btVector3(0,currentVelocity.y(),0));
+	}
+	else
+	{
+		translate*=walkSpeed;
+		translate = cameraObj->getOrientation().IDENTITY * translate;
+		monsterCapsule->setLinearVelocity(btVector3(translate.x,currentVelocity.y(),translate.z));
+	}
+
+	//keep standing
+	
+	gamePhysics->step(deltaTime);
+		cameraObj->setPosition(camera->getPosition());
 
 	root->renderOneFrame();
-	
+
 	//If vsync isn't enabled
 	if(!window->isVSyncEnabled())
 	if(deltaTime < (1.0f/240.0f)*1000)
@@ -151,6 +207,7 @@ void Game::update()
 	if(keyboard->isKeyDown(OIS::KC_ESCAPE))gameRunning = false;
 	if(keyboard->isKeyDown(OIS::KC_F1))turnOffLight();
 	if(keyboard->isKeyDown(OIS::KC_F2))turnOnLight();
+
 
 }
 

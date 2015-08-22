@@ -19,6 +19,7 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">pch.hpp</PrecompiledHeaderFile>
     </ClCompile>
     <ClCompile Include="src\Game.cpp" />
+    <ClCompile Include="src\GamePhysics.cpp" />
     <ClCompile Include="src\InputManager.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Monster.cpp" />
@@ -32,6 +33,7 @@
     <ClInclude Include="3rdParty\BtOgreGP.h" />
     <ClInclude Include="3rdParty\BtOgrePG.h" />
     <ClInclude Include="include\Game.h" />
+    <ClInclude Include="include\GamePhysics.hpp" />
     <ClInclude Include="include\InputManager.hpp" />
     <ClInclude Include="include\Monster.hpp" />
     <ClInclude Include="pch.hpp" />
