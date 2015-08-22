@@ -1,6 +1,11 @@
 #ifndef GAME
 #define GAME
-
+#ifdef _WIN32
+#define WIN32_LEAN_AND_MEAN
+#include <Windows.h>
+#else
+#include <unistd.h>
+#endif
 #include <Ogre.h>
 #include "InputManager.hpp"
 #include "Monster.hpp"
@@ -11,6 +16,10 @@ public:
 	~Game();
 	void run();
 private:
+
+	void turnOffLight();
+	void turnOnLight();
+
 	void update();
 	Ogre::Root* root;
 	Ogre::RenderWindow* window;
@@ -39,6 +48,8 @@ private:
 	//Scene content
 	Ogre::Light* roomLight;
 
+
+	Ogre::ColourValue off, on;
 };
 
 #endif

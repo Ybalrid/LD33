@@ -1,12 +1,23 @@
 #include "pch.hpp"
 #include "Game.h"
 
+void sleep(int millisec)
+{
+#ifdef _WIN32
+	Sleep(millisec);
+#else
+	usleep(millec*1000);
+#endif
+}
+
 Game::Game() :
 	root(nullptr),
 	window(nullptr),
 	gameRunning(false),
 	mouseSpeed(10),
-	walkSpeed(3)
+	walkSpeed(3),
+	off(.1f,.2f,.5f),
+	on(Ogre::ColourValue::White)
 {
 	monster = new Monster;
 	//Select the correct set of plugin to load
@@ -31,21 +42,15 @@ Game::Game() :
 	smgr=root->createSceneManager("OctreeSceneManager");
 	smgr->setShadowTechnique(Ogre::ShadowTechnique::SHADOWTYPE_STENCIL_ADDITIVE);
 	camera=smgr->createCamera("Main_Cam");
+	camera->setAutoAspectRatio(true);
 	viewport=window->addViewport(camera);
 	viewport->setBackgroundColour(Ogre::ColourValue::Blue);
 	gameRunning=true;
 
-
-	//Tmp------------- testing
-	monster->setPlanarCoordinates(Ogre::Vector2(1.75, -1));
-
-	camera->setPosition(monster->getPlanarCoodinates().x, monster->getHeight(), monster->getPlanarCoodinates().y);
-	camera->lookAt(0,monster->getHeight(),-1);
-	camera->setNearClipDistance(0.0001);
-	camera->setFarClipDistance(10000);
 	resourceManager = Ogre::ResourceGroupManager::getSingletonPtr();
 	resourceManager->addResourceLocation("./res/graphics", "FileSystem", "GAME", true);
 	resourceManager->initialiseResourceGroup("GAME");
+
 
 	staticGeometry = smgr->getRootSceneNode()->createChildSceneNode();
 	staticGeometry->attachObject(smgr->createEntity("floor_walls.mesh"));
@@ -56,10 +61,16 @@ Game::Game() :
 	staticGeometry->attachObject(smgr->createEntity("nightstand.drawer.mesh"));
 	staticGeometry->attachObject(smgr->createEntity("toybox.mesh"));
 
+	monster->setPlanarCoordinates(Ogre::Vector2(1.75, -1));
+
+	camera->setPosition(monster->getPlanarCoodinates().x, monster->getHeight(), monster->getPlanarCoodinates().y);
+	camera->lookAt(0,monster->getHeight(),-1);
+	camera->setNearClipDistance(0.0001);
+	camera->setFarClipDistance(10000);
 
 	roomLight =  smgr->createLight();
 	roomLight->setPosition(0,1,0);
-	roomLight->setDiffuseColour(.5f,.5f,.5f);
+	roomLight->setDiffuseColour(.1f,.1f,.5f);
 	
 	lastTimeSinceStartup = root->getTimer()->getMilliseconds();
 }
@@ -85,6 +96,7 @@ float sec(unsigned long milli)
 void Game::update()
 {
 	refreshTimer();
+
 	Ogre::WindowEventUtilities::messagePump();
 
 	gameInputManager->capture();
@@ -125,11 +137,21 @@ void Game::update()
 
 	monster->setPlanarCoordinates(monster->getPlanarCoodinates() + Ogre::Vector2(translate.x, translate.z));
 	camera->setPosition(monster->getPlanarCoodinates().x, monster->getHeight(), monster->getPlanarCoodinates().y);
-	
+
 	root->renderOneFrame();
+	
+	//If vsync isn't enabled
+	if(!window->isVSyncEnabled())
+	if(deltaTime < (1.0f/240.0f)*1000)
+		//limit framerate to prevent timing errors and to offload CPU
+		sleep((1.0f/240.0f)*1000 - deltaTime);
 
 	//Stop the gameloop if the window is closed (quit game)
 	if(window->isClosed())gameRunning=false;
+	if(keyboard->isKeyDown(OIS::KC_ESCAPE))gameRunning = false;
+	if(keyboard->isKeyDown(OIS::KC_F1))turnOffLight();
+	if(keyboard->isKeyDown(OIS::KC_F2))turnOnLight();
+
 }
 
 void Game::refreshTimer()
@@ -137,4 +159,14 @@ void Game::refreshTimer()
 	currentTimeSinceStartup = root->getTimer()->getMilliseconds();
 	deltaTime =  currentTimeSinceStartup - lastTimeSinceStartup;
 	lastTimeSinceStartup = currentTimeSinceStartup;
+}
+
+void Game::turnOffLight()
+{
+	roomLight->setDiffuseColour(off);
+}
+
+void Game::turnOnLight()
+{
+	roomLight->setDiffuseColour(on);
 }
