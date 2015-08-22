@@ -70,7 +70,7 @@ Game::Game() :
 
 	roomLight =  smgr->createLight();
 	roomLight->setPosition(0,1,0);
-	roomLight->setDiffuseColour(.1f,.1f,.5f);
+	roomLight->setDiffuseColour(off);
 	
 	lastTimeSinceStartup = root->getTimer()->getMilliseconds();
 }
