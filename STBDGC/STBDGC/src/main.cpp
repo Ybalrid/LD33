@@ -8,6 +8,8 @@
 #define mainFunc() int main(void) 
 #endif
 
+#include <Ogre.h>
+
 mainFunc()
 {
 	return EXIT_SUCCESS;
