@@ -9,9 +9,14 @@ You gotta do your job, but, beware... Parents are here. And it's *verry dangerou
 
 C++
 Ogre
+Bullet Physics
 
+
+build instruction :
 Uncompress OgreSDK in the OgreSDK directory
-Compile with Visual Studio 2012.
+Uncompress bullet SDK in the bullet directory
+Compile with Visual Studio 2012. (open solution  STBDGC/STBGC/STBGC.sln, compile in relase mode, executable in the bin subdirectory of the solution.
+
 
 
 
