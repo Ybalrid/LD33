@@ -1,4 +1,6 @@
+#include "pch.hpp"
 #include <iostream>
+
 
 #ifdef _WIN32
 #define mainFunc() int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine, int nCmdShow)

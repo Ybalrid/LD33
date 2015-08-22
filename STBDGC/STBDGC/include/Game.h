@@ -2,7 +2,8 @@
 #define GAME
 
 #include <Ogre.h>
-
+#include "InputManager.hpp"
+#include "Monster.hpp"
 class Game
 {
 public:
@@ -18,6 +19,23 @@ private:
 	Ogre::Viewport* viewport;
 	Ogre::ResourceGroupManager* resourceManager;
 	bool gameRunning;
+
+	//Custom game classes:
+	GameInputManager* gameInputManager;
+	float mouseSpeed, walkSpeed;
+	int mouseX, mouseY;
+
+	//The player IS THE MONSTER!! (that's the theme of the jam...)
+	Monster* monster;
+
+	void refreshTimer();
+	unsigned long deltaTime;
+	unsigned long lastTimeSinceStartup;
+	unsigned long currentTimeSinceStartup;
+
+
+	//Scene content
+	Ogre::Light* roomLight;
 
 };
 

@@ -1,0 +1,39 @@
+# Written by MakeHuman 1.0.2
+version v1.0.2
+tags makehuman
+face head-scale-depth-less-more -0.048000
+face head-trans-down-up -0.226000
+face head-scale-vert-more-less -0.370000
+face head-age-less-more -0.388000
+face head-scale-horiz-less-more 0.194000
+face head-trans-forward-backward 0.322000
+face head-angle-in-out 0.194000
+face head-invertedtriangular 0.258000
+tongue tongue01 52ad91a3-caad-4e50-8c38-67634e5e789c
+teeth Teeth_Base 8ed08ea6-e3ad-4d36-b8e7-c4e3836e66b7
+proxy male1591 d7e4934e-daed-4ad5-a055-18c9cba487dc
+hair mhair02 f81a4e9a-e3d7-4ecb-bdf0-16d7fd9070a4
+eyelashes Eyelashes01 d533836f-13ad-4836-8b65-051108253cd2
+eyebrows Eyebrow001 9c81ec3a-faa5-4c94-9cdb-992300ba3084
+eyes Low-Poly 1cc97a30-85a1-42e6-a9f7-b3e753732baa
+clothes tshirt02 1bba9db9-1859-424b-bbff-e3abd48f0fc5
+clothes short01 f859bbbd-3b32-4a52-aa91-813ff2f0d1af
+clothesHideFaces True
+gendered BreastFirmness 0.500000
+gendered BreastSize 0.500000
+macro Weight 0.500000
+macro Gender 1.000000
+macro Age 0.121000
+macro Height 0.500000
+macro Asian 0.000000
+macro African 0.000000
+macro Caucasian 1.000000
+macro Muscle 0.500000
+macro BodyProportions 0.500000
+background enabled False
+skinMaterial skins/young_caucasian_female/young_caucasian_female_sweat.mhmat
+material short01 f859bbbd-3b32-4a52-aa91-813ff2f0d1af clothes/short01/black_satin.mhmat
+material mhair02 f81a4e9a-e3d7-4ecb-bdf0-16d7fd9070a4 hair/mhair02/materials/male02_black.mhmat
+material Low-Poly 1cc97a30-85a1-42e6-a9f7-b3e753732baa eyes/materials/brown.mhmat
+skeleton game.json
+subdivide True

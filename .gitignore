@@ -7,3 +7,7 @@
 *.ilk
 *.suo
 ./OgreSDK/*
+*.obj
+*.exe
+./OgreSDK/
+
