@@ -8,9 +8,12 @@
 #define mainFunc() int main(void) 
 #endif
 
-#include <Ogre.h>
+#include "Game.h"
 
 mainFunc()
 {
+	Game* g(new Game());
+	g->run();
+	delete g;
 	return EXIT_SUCCESS;
 }
