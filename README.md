@@ -15,7 +15,7 @@ Bullet Physics
 build instruction :
 Uncompress OgreSDK in the OgreSDK directory
 Uncompress bullet SDK in the bullet directory
-Compile with Visual Studio 2012. (open solution  STBDGC/STBGC/STBGC.sln, compile in relase mode, executable in the bin subdirectory of the solution.
+Compile with Visual Studio 2012. (open solution  STBDGC/STBGC.sln, compile in relase mode, executable in the bin subdirectory of the solution.
 
 
 
