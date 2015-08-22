@@ -45,9 +45,6 @@
       <Filter>Fichiers sources</Filter>
     </ClInclude>
     <ClInclude Include="pch.hpp" />
-    <ClInclude Include="Header.h">
-      <Filter>Fichiers sources</Filter>
-    </ClInclude>
     <ClInclude Include="include\InputManager.hpp">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>

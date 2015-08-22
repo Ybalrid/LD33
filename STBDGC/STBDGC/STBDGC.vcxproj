@@ -27,7 +27,6 @@
     <None Include="bin\plugin_d.cfg" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Header.h" />
     <ClInclude Include="include\Game.h" />
     <ClInclude Include="include\InputManager.hpp" />
     <ClInclude Include="include\Monster.hpp" />

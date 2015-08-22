@@ -87,22 +87,33 @@ void Game::update()
 
 	OIS::Keyboard* keyboard = gameInputManager->getKeyboard();
 	Ogre::Vector3 translate;
-
+	bool displacement(false);
 	if(keyboard->isKeyDown(OIS::KC_W) || keyboard->isKeyDown(OIS::KC_UP))
+	{
+		displacement = true;
 		translate += camera->getOrientation() * Ogre::Vector3(0,0,-1);
+	}
 	if(keyboard->isKeyDown(OIS::KC_A) || keyboard->isKeyDown(OIS::KC_LEFT))
-		translate += camera->getOrientation() * Ogre::Vector3(-1,0,0);
-	if(keyboard->isKeyDown(OIS::KC_S) || keyboard->isKeyDown(OIS::KC_DOWN))
-		translate += camera->getOrientation() * Ogre::Vector3(0,0,1);
-	if(keyboard->isKeyDown(OIS::KC_D) || keyboard->isKeyDown(OIS::KC_RIGHT))
-		translate += camera->getOrientation() * Ogre::Vector3(1,0,0);
+	{		displacement = true;
 
+		translate += camera->getOrientation() * Ogre::Vector3(-1,0,0);
+	}
+	if(keyboard->isKeyDown(OIS::KC_S) || keyboard->isKeyDown(OIS::KC_DOWN))
+	{		displacement = true;
+
+		translate += camera->getOrientation() * Ogre::Vector3(0,0,1);
+	}
+	if(keyboard->isKeyDown(OIS::KC_D) || keyboard->isKeyDown(OIS::KC_RIGHT))
+	{		displacement = true;
+
+		translate += camera->getOrientation() * Ogre::Vector3(1,0,0);
+	}
 	
+	if(displacement)
+		translate.normalise();
 	translate *= sec(deltaTime)*walkSpeed;
 
 	monster->setPlanarCoordinates(monster->getPlanarCoodinates() + Ogre::Vector2(translate.x, translate.z));
-
-
 	camera->setPosition(monster->getPlanarCoodinates().x, monster->getHeight(), monster->getPlanarCoodinates().y);
 	
 	root->renderOneFrame();
