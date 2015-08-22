@@ -1,3 +1,6 @@
 *.sdf
 *.opensdf
-
+*.dll
+*.pdb
+*.log
+*.ilk
