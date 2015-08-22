@@ -11,6 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="3rdParty\BtOgre.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -18,6 +19,7 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">pch.hpp</PrecompiledHeaderFile>
     </ClCompile>
     <ClCompile Include="src\Game.cpp" />
+    <ClCompile Include="src\GamePhysics.cpp" />
     <ClCompile Include="src\InputManager.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Monster.cpp" />
@@ -27,7 +29,11 @@
     <None Include="bin\plugin_d.cfg" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="3rdParty\BtOgreExtras.h" />
+    <ClInclude Include="3rdParty\BtOgreGP.h" />
+    <ClInclude Include="3rdParty\BtOgrePG.h" />
     <ClInclude Include="include\Game.h" />
+    <ClInclude Include="include\GamePhysics.hpp" />
     <ClInclude Include="include\InputManager.hpp" />
     <ClInclude Include="include\Monster.hpp" />
     <ClInclude Include="pch.hpp" />
@@ -65,13 +71,13 @@
     <LinkIncremental>true</LinkIncremental>
     <OutDir>./bin/</OutDir>
     <IntDir>./obj/</IntDir>
-    <IncludePath>./include/;../../OgreSDK/include/OGRE;../../OgreSDK/include/OIS;$(IncludePath)</IncludePath>
+    <IncludePath>./include/;../../OgreSDK/include/OGRE;../../OgreSDK/include/OIS;./3rdParty/;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>./bin/</OutDir>
     <IntDir>./obj/</IntDir>
-    <IncludePath>./include/;../../OgreSDK/include/OGRE;../../OgreSDK/include/OIS;$(IncludePath)</IncludePath>
+    <IncludePath>./include/;../../OgreSDK/include/OGRE;../../OgreSDK/include/OIS;./3rdParty/;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -99,7 +105,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>../../OgreSDK/include/OGRE;../../OgreSDK/boost/;../../OgreSDK/include/OIS;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../OgreSDK/include/OGRE;../../OgreSDK/boost/;../../OgreSDK/include/OIS;../../bullet/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeaderFile>pch.hpp</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>./obj/pch/$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
       <AdditionalOptions>-Zm300 %(AdditionalOptions)</AdditionalOptions>
@@ -109,8 +115,8 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>../../OgreSDK/boost/lib;../../OgreSDK/lib/Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>OgreMain.lib;OIS.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>../../OgreSDK/boost/lib;../../OgreSDK/lib/Release;../../bullet/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>OgreMain.lib;OIS.lib;BulletCollision_vs2010.lib;BulletDynamics_vs2010.lib;LinearMath_vs2010.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

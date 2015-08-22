@@ -31,6 +31,12 @@
     <ClCompile Include="src\Monster.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
+    <ClCompile Include="3rdParty\BtOgre.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GamePhysics.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="bin\plugin.cfg">
@@ -50,6 +56,18 @@
     </ClInclude>
     <ClInclude Include="include\Monster.hpp">
       <Filter>Fichiers sources</Filter>
+    </ClInclude>
+    <ClInclude Include="3rdParty\BtOgreExtras.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="3rdParty\BtOgreGP.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="3rdParty\BtOgrePG.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GamePhysics.hpp">
+      <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
