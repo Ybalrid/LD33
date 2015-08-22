@@ -47,9 +47,19 @@ Game::Game() :
 	resourceManager->addResourceLocation("./res/graphics", "FileSystem", "GAME", true);
 	resourceManager->initialiseResourceGroup("GAME");
 
-	smgr->getRootSceneNode()->createChildSceneNode()->attachObject(smgr->createEntity("floor_walls.mesh"));
+	staticGeometry = smgr->getRootSceneNode()->createChildSceneNode();
+	staticGeometry->attachObject(smgr->createEntity("floor_walls.mesh"));
+	staticGeometry->attachObject(smgr->createEntity("bed_struct.mesh"));
+	staticGeometry->attachObject(smgr->createEntity("bookshelf.mesh"));
+	staticGeometry->attachObject(smgr->createEntity("mattress.mesh"));
+	staticGeometry->attachObject(smgr->createEntity("nightstand.mesh"));
+	staticGeometry->attachObject(smgr->createEntity("nightstand.drawer.mesh"));
+	staticGeometry->attachObject(smgr->createEntity("toybox.mesh"));
+
+
 	roomLight =  smgr->createLight();
 	roomLight->setPosition(0,1,0);
+	roomLight->setDiffuseColour(.5f,.5f,.5f);
 	
 	lastTimeSinceStartup = root->getTimer()->getMilliseconds();
 }
@@ -94,18 +104,18 @@ void Game::update()
 		translate += camera->getOrientation() * Ogre::Vector3(0,0,-1);
 	}
 	if(keyboard->isKeyDown(OIS::KC_A) || keyboard->isKeyDown(OIS::KC_LEFT))
-	{		displacement = true;
-
+	{		
+		displacement = true;
 		translate += camera->getOrientation() * Ogre::Vector3(-1,0,0);
 	}
 	if(keyboard->isKeyDown(OIS::KC_S) || keyboard->isKeyDown(OIS::KC_DOWN))
-	{		displacement = true;
-
+	{		
+		displacement = true;
 		translate += camera->getOrientation() * Ogre::Vector3(0,0,1);
 	}
 	if(keyboard->isKeyDown(OIS::KC_D) || keyboard->isKeyDown(OIS::KC_RIGHT))
-	{		displacement = true;
-
+	{		
+		displacement = true;
 		translate += camera->getOrientation() * Ogre::Vector3(1,0,0);
 	}
 	

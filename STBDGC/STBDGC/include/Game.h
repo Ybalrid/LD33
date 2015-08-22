@@ -33,6 +33,8 @@ private:
 	unsigned long lastTimeSinceStartup;
 	unsigned long currentTimeSinceStartup;
 
+	Ogre::SceneNode* staticGeometry;
+
 
 	//Scene content
 	Ogre::Light* roomLight;
