@@ -78,13 +78,13 @@ Game::Game() :
 	monster->setPlanarCoordinates(Ogre::Vector2(1.75, -1));
 
 	camera->setPosition(monster->getPlanarCoodinates().x, monster->getHeight()+.1f, monster->getPlanarCoodinates().y);
-	//cameraObj->lookAt(0,monster->getHeight()+.1f,-1);
+	cameraObj->lookAt(0,0,0);
 	cameraObj->setNearClipDistance(0.0001);
 	cameraObj->setFarClipDistance(10000);
 
 	roomLight =  smgr->createLight();
 	roomLight->setPosition(0,1,0);
-	roomLight->setDiffuseColour(off);
+	roomLight->setDiffuseColour(on);
 	
 	lastTimeSinceStartup = root->getTimer()->getMilliseconds();
 
@@ -192,7 +192,7 @@ void Game::update()
 	//keep standing
 	
 	gamePhysics->step(deltaTime);
-		cameraObj->setPosition(camera->getPosition());
+	cameraObj->setPosition(camera->getPosition() + Ogre::Vector3(0,monster->getHeight()/2,0));
 
 	root->renderOneFrame();
 
