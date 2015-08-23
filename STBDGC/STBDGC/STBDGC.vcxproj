@@ -35,6 +35,7 @@
     <ClInclude Include="include\Game.h" />
     <ClInclude Include="include\GamePhysics.hpp" />
     <ClInclude Include="include\InputManager.hpp" />
+    <ClInclude Include="include\LittleBoy.hpp" />
     <ClInclude Include="include\Monster.hpp" />
     <ClInclude Include="pch.hpp" />
   </ItemGroup>

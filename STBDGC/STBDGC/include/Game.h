@@ -11,6 +11,8 @@
 #include "Monster.hpp"
 
 #include "GamePhysics.hpp"
+#include <vector>
+
 class Game
 {
 public:
@@ -55,6 +57,9 @@ private:
 	GamePhysics* gamePhysics;
 	void createStaticRigidBody(Ogre::SceneNode* node, Ogre::Entity* entity);
 	btRigidBody* monsterCapsule;
+
+	std::vector<Ogre::AnimationState*>* playing;
+	void addTimeToAnimationState(std::vector<Ogre::AnimationState*>* animationStatesToPlay);
 };
 
 #endif

@@ -17,7 +17,8 @@ Game::Game() :
 	mouseSpeed(10),
 	walkSpeed(3),
 	off(.1f,.2f,.5f),
-	on(Ogre::ColourValue::White)
+	on(Ogre::ColourValue::White),
+	playing(nullptr)
 {
 	monster = new Monster;
 	//Select the correct set of plugin to load
@@ -94,7 +95,44 @@ Game::Game() :
 	monsterCapsuleShape->calculateLocalInertia(100,inertia);
 	monsterCapsule = new btRigidBody(100,state,monsterCapsuleShape,inertia);
 	gamePhysics->getWorld()->addRigidBody(monsterCapsule);
+		
+	Ogre::SceneNode* boy = smgr->getRootSceneNode()->createChildSceneNode();
 
+	std::vector<Ogre::AnimationState*>* anims = new std::vector<Ogre::AnimationState*>;
+
+	
+	boy->attachObject(tmpEntity = smgr->createEntity("makehuman_Eyebrow001.mesh"));
+	anims->push_back(tmpEntity->getAnimationState("idle_sleep"));
+	boy->attachObject(tmpEntity = smgr->createEntity("makehuman_Eyelashes01.mesh"));
+	anims->push_back(tmpEntity->getAnimationState("idle_sleep"));
+	boy->attachObject(tmpEntity = smgr->createEntity("makehuman_Low-Poly.mesh"));
+	anims->push_back(tmpEntity->getAnimationState("idle_sleep"));
+	boy->attachObject(tmpEntity = smgr->createEntity("makehuman_Teeth_Base.mesh"));
+	anims->push_back(tmpEntity->getAnimationState("idle_sleep"));
+	boy->attachObject(tmpEntity = smgr->createEntity("makehuman_male1591.mesh"));
+	anims->push_back(tmpEntity->getAnimationState("idle_sleep"));
+	boy->attachObject(tmpEntity = smgr->createEntity("makehuman_mhair02.mesh"));
+	anims->push_back(tmpEntity->getAnimationState("idle_sleep"));
+	boy->attachObject(tmpEntity = smgr->createEntity("makehuman_short01.mesh"));
+	anims->push_back(tmpEntity->getAnimationState("idle_sleep"));
+	boy->attachObject(tmpEntity = smgr->createEntity("makehuman_tongue01.mesh"));
+	anims->push_back(tmpEntity->getAnimationState("idle_sleep"));
+	boy->attachObject(tmpEntity = smgr->createEntity("makehuman_tshirt02.mesh"));
+	anims->push_back(tmpEntity->getAnimationState("idle_sleep"));
+
+	for(Ogre::AnimationState* a : *anims)
+	{
+		a->setEnabled(true);
+		a->setLoop(true);
+	}
+
+
+	boy->pitch(Ogre::Degree(-90));
+	boy->setPosition(-1.57, .3385f,- .4252);
+
+	playing = anims;
+
+	
 }
 
 void Game::createStaticRigidBody(Ogre::SceneNode* node, Ogre::Entity* entity)
@@ -128,6 +166,7 @@ float sec(unsigned long milli)
 void Game::update()
 {
 	refreshTimer();
+	if(playing) for (Ogre::AnimationState* a : *playing) a->addTime(float(deltaTime)/1000.0f);
 
 	monsterCapsule->activate();
 
