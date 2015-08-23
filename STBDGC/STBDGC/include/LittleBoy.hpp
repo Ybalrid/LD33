@@ -6,7 +6,21 @@
 class LittleBoy
 {
 public:
-	LittleBoy(Ogre::SceneNode* boy);
+	enum anims{idleSleep, surpriseJump};
+	LittleBoy(Ogre::SceneNode* boy, Ogre::SceneManager* smgr);
+	~LittleBoy();
+
+	void addTime(float time);
+	void play(anims whatToPlay);
+private:
+
+	Ogre::SceneNode* rootBoy;
+	typedef std::vector<Ogre::AnimationState*> AnimationStateVect;
+	AnimationStateVect *idle_sleep, *surprise_jump;
+	AnimationStateVect* playing;
+	float playTime;
+	anims currentIdle;
+
 };
 
 #endif

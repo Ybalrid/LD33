@@ -9,7 +9,7 @@
 #include <Ogre.h>
 #include "InputManager.hpp"
 #include "Monster.hpp"
-
+#include "LittleBoy.hpp"
 #include "GamePhysics.hpp"
 #include <vector>
 
@@ -57,9 +57,11 @@ private:
 	GamePhysics* gamePhysics;
 	void createStaticRigidBody(Ogre::SceneNode* node, Ogre::Entity* entity);
 	btRigidBody* monsterCapsule;
-
+	LittleBoy* littleBoy;
+	
 	std::vector<Ogre::AnimationState*>* playing;
 	void addTimeToAnimationState(std::vector<Ogre::AnimationState*>* animationStatesToPlay);
+	bool debounceE;
 };
 
 #endif

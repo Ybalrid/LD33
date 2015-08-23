@@ -21,6 +21,7 @@
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\GamePhysics.cpp" />
     <ClCompile Include="src\InputManager.cpp" />
+    <ClCompile Include="src\LittleBoy.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Monster.cpp" />
   </ItemGroup>

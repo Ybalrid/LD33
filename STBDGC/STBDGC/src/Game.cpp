@@ -40,7 +40,7 @@ Game::Game() :
 	gameInputManager = new GameInputManager(window);
 
 
-	smgr=root->createSceneManager("OctreeSceneManager");
+	smgr=root->createSceneManager("OctreeSceneManager", "MAIN_SMGR");
 	smgr->setShadowTechnique(Ogre::ShadowTechnique::SHADOWTYPE_STENCIL_ADDITIVE);
 	gamePhysics = new GamePhysics(smgr->getRootSceneNode());
 
@@ -98,41 +98,14 @@ Game::Game() :
 		
 	Ogre::SceneNode* boy = smgr->getRootSceneNode()->createChildSceneNode();
 
-	std::vector<Ogre::AnimationState*>* anims = new std::vector<Ogre::AnimationState*>;
 
-	
-	boy->attachObject(tmpEntity = smgr->createEntity("makehuman_Eyebrow001.mesh"));
-	anims->push_back(tmpEntity->getAnimationState("idle_sleep"));
-	boy->attachObject(tmpEntity = smgr->createEntity("makehuman_Eyelashes01.mesh"));
-	anims->push_back(tmpEntity->getAnimationState("idle_sleep"));
-	boy->attachObject(tmpEntity = smgr->createEntity("makehuman_Low-Poly.mesh"));
-	anims->push_back(tmpEntity->getAnimationState("idle_sleep"));
-	boy->attachObject(tmpEntity = smgr->createEntity("makehuman_Teeth_Base.mesh"));
-	anims->push_back(tmpEntity->getAnimationState("idle_sleep"));
-	boy->attachObject(tmpEntity = smgr->createEntity("makehuman_male1591.mesh"));
-	anims->push_back(tmpEntity->getAnimationState("idle_sleep"));
-	boy->attachObject(tmpEntity = smgr->createEntity("makehuman_mhair02.mesh"));
-	anims->push_back(tmpEntity->getAnimationState("idle_sleep"));
-	boy->attachObject(tmpEntity = smgr->createEntity("makehuman_short01.mesh"));
-	anims->push_back(tmpEntity->getAnimationState("idle_sleep"));
-	boy->attachObject(tmpEntity = smgr->createEntity("makehuman_tongue01.mesh"));
-	anims->push_back(tmpEntity->getAnimationState("idle_sleep"));
-	boy->attachObject(tmpEntity = smgr->createEntity("makehuman_tshirt02.mesh"));
-	anims->push_back(tmpEntity->getAnimationState("idle_sleep"));
-
-	for(Ogre::AnimationState* a : *anims)
-	{
-		a->setEnabled(true);
-		a->setLoop(true);
-	}
-
+	littleBoy = new LittleBoy(boy, smgr);
 
 	boy->pitch(Ogre::Degree(-90));
-	boy->setPosition(-1.57, .3385f,- .4252);
+	boy->setPosition(-1.57, .3385f,- .5252);
 
-	playing = anims;
-
-	
+	littleBoy->play(LittleBoy::idleSleep);
+	debounceE = false;
 }
 
 void Game::createStaticRigidBody(Ogre::SceneNode* node, Ogre::Entity* entity)
@@ -166,8 +139,7 @@ float sec(unsigned long milli)
 void Game::update()
 {
 	refreshTimer();
-	if(playing) for (Ogre::AnimationState* a : *playing) a->addTime(float(deltaTime)/1000.0f);
-
+	littleBoy->addTime(sec(deltaTime));
 	monsterCapsule->activate();
 
 	Ogre::WindowEventUtilities::messagePump();
@@ -189,20 +161,16 @@ void Game::update()
 		displacement = true;
 		translate.z -=1;
 	}
-		
 	if(keyboard->isKeyDown(OIS::KC_A))
 	{
 		displacement = true;
 		translate.x -=1;
-
 	}	
-	
 	if(keyboard->isKeyDown(OIS::KC_S))
 	{
 		displacement = true;
 		translate.z +=1;
 	}	
-	
 	if(keyboard->isKeyDown(OIS::KC_D))
 	{
 		displacement = true;
@@ -228,8 +196,7 @@ void Game::update()
 		monsterCapsule->setLinearVelocity(btVector3(translate.x,currentVelocity.y(),translate.z));
 	}
 
-	//keep standing
-	
+
 	gamePhysics->step(deltaTime);
 	cameraObj->setPosition(camera->getPosition() + Ogre::Vector3(0,monster->getHeight()/2,0));
 
@@ -246,7 +213,9 @@ void Game::update()
 	if(keyboard->isKeyDown(OIS::KC_ESCAPE))gameRunning = false;
 	if(keyboard->isKeyDown(OIS::KC_F1))turnOffLight();
 	if(keyboard->isKeyDown(OIS::KC_F2))turnOnLight();
-
+	if(debounceE && !keyboard->isKeyDown(OIS::KC_E))littleBoy->play(LittleBoy::surpriseJump);
+	if(keyboard->isKeyDown(OIS::KC_E))debounceE=true;
+	if(!keyboard->isKeyDown(OIS::KC_E))debounceE=false;
 
 }
 
