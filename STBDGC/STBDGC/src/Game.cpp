@@ -43,7 +43,7 @@ Game::Game() :
 
 
 	//Create the window folowing config
-	window = root->initialise(true, "Scare them... But don't get cought!");
+	window = root->initialise(true, "Scare them... But don't get caught!");
 	gameInputManager = new GameInputManager(window);
 
 
@@ -183,7 +183,7 @@ Game::Game() :
 	titleScreen = static_cast<TextAreaOverlayElement*>(
 		overlayManager.createOverlayElement("TextArea", "TitleScreen"));
 	titleScreen->setMetricsMode(Ogre::GMM_RELATIVE);
-	titleScreen->setPosition(0.25,0.5-(1.0f/15.0f));
+	titleScreen->setPosition(0.1,0.5-(1.0f/15.0f));
 	titleScreen->setDimensions(0.5,0.5);
 	titleScreen->setCaption("Press ENTER to Start...");
 	titleScreen->setCharHeight(1.0f/15.0f);
@@ -239,7 +239,7 @@ void Game::update()
 		"You are the monster that lives in the closet...\nYou scare this little boy for a living... It's finaly bedtime...\nNow, you can go. But beware, parents are at home, You'll disapear if they see you...\n\nA game by Ybalrid for the Ludum Dare #33"
 
 		);
-	titleScreen->setCaption("Scare them... But don't get cought!\nPress ENTER to Start...");
+	titleScreen->setCaption("Scare them... But don't get caught!\nPress ENTER to Start...");
 
 	Ogre::WindowEventUtilities::messagePump();
 	gameInputManager->capture();
