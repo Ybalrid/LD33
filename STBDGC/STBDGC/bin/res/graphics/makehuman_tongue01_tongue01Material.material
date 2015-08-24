@@ -1,12 +1,12 @@
-// makehuman:tongue01:tongue01Material genrated by blender2ogre 0.6.0
+// makehuman_tongue01_tongue01Material genrated by blender2ogre 0.6.0
 
-material makehuman:tongue01:tongue01Material 
+material makehuman_tongue01_tongue01Material 
 {
     receive_shadows on 
 
     technique
     {
-        pass makehuman:tongue01:tongue01Material
+        pass makehuman_tongue01_tongue01Material
         {
             ambient 1.0 1.0 1.0 0.0
             diffuse 1.0 1.0 1.0 0.0

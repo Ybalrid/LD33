@@ -1,12 +1,12 @@
-// makehuman:tshirt02:tshirt02Material genrated by blender2ogre 0.6.0
+// makehuman_tshirt02_tshirt02Material genrated by blender2ogre 0.6.0
 
-material makehuman:tshirt02:tshirt02Material 
+material makehuman_tshirt02_tshirt02Material 
 {
     receive_shadows on 
 
     technique
     {
-        pass makehuman:tshirt02:tshirt02Material
+        pass makehuman_tshirt02_tshirt02Material
         {
             ambient 1.0 1.0 1.0 0.0
             diffuse 1.0 1.0 1.0 0.0
@@ -36,13 +36,6 @@ material makehuman:tshirt02:tshirt02Material
                 tex_address_mode wrap
                 scale 1.0 1.0
                 colour_op alpha_blend
-            }
-            texture_unit 
-            {
-                texture tshirt02_normals.png
-                tex_address_mode wrap
-                scale 1.0 1.0
-                colour_op modulate
             }
         }
     }

@@ -22475,7 +22475,7 @@
         </vertexbuffer>
     </sharedgeometry>
     <submeshes>
-        <submesh usesharedvertices="true" use32bitindexes="False" operationtype="triangle_list" material="makehuman:Teeth_Base:teethMaterial">
+        <submesh usesharedvertices="true" use32bitindexes="False" operationtype="triangle_list" material="makehuman_Teeth_Base:teethMaterial">
             <faces count="7120">
                 <face v2="1" v1="0" v3="2"/>
                 <face v2="2" v1="0" v3="3"/>
@@ -29601,7 +29601,7 @@
         </submesh>
     </submeshes>
     <submeshnames>
-        <submesh index="0" name="makehuman:Teeth_Base:teethMaterial">
+        <submesh index="0" name="makehuman_Teeth_Base:teethMaterial">
         </submesh>
     </submeshnames>
     <skeletonlink name="makehuman_Teeth_Base.skeleton"/>

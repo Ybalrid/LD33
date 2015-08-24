@@ -11760,7 +11760,7 @@
         </vertexbuffer>
     </sharedgeometry>
     <submeshes>
-        <submesh usesharedvertices="true" use32bitindexes="False" operationtype="triangle_list" material="makehuman:mhair02:mhair02black">
+        <submesh usesharedvertices="true" use32bitindexes="False" operationtype="triangle_list" material="makehuman_mhair02_mhair02black">
             <faces count="3460">
                 <face v2="1" v1="0" v3="2"/>
                 <face v2="2" v1="0" v3="3"/>
@@ -15226,7 +15226,7 @@
         </submesh>
     </submeshes>
     <submeshnames>
-        <submesh index="0" name="makehuman:mhair02:mhair02black">
+        <submesh index="0" name="makehuman_mhair02_mhair02black">
         </submesh>
     </submeshnames>
     <skeletonlink name="makehuman_mhair02.skeleton"/>

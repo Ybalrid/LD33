@@ -1,12 +1,12 @@
-// makehuman:mhair02:mhair02black genrated by blender2ogre 0.6.0
+// makehuman_mhair02_mhair02black genrated by blender2ogre 0.6.0
 
-material makehuman:mhair02:mhair02black 
+material makehuman_mhair02_mhair02black 
 {
     receive_shadows on 
 
     technique
     {
-        pass makehuman:mhair02:mhair02black
+        pass makehuman_mhair02_mhair02black
         {
             ambient 1.0 1.0 1.0 0.0
             diffuse 1.0 1.0 1.0 0.0

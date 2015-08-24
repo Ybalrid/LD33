@@ -1,12 +1,12 @@
-// makehuman:Skin genrated by blender2ogre 0.6.0
+// makehuman_Skin genrated by blender2ogre 0.6.0
 
-material makehuman:Skin 
+material makehuman_Skin 
 {
     receive_shadows on 
 
     technique
     {
-        pass makehuman:Skin
+        pass makehuman_Skin
         {
             ambient 1.0 1.0 1.0 0.0
             diffuse 1.0 1.0 1.0 0.0

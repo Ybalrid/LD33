@@ -485,7 +485,7 @@
         </vertexbuffer>
     </sharedgeometry>
     <submeshes>
-        <submesh usesharedvertices="true" use32bitindexes="False" operationtype="triangle_list" material="makehuman:Low-Poly:Eye_brown">
+        <submesh usesharedvertices="true" use32bitindexes="False" operationtype="triangle_list" material="makehuman_Low-Poly_Eye_brown">
             <faces count="172">
                 <face v2="1" v1="0" v3="2"/>
                 <face v2="2" v1="0" v3="3"/>
@@ -663,7 +663,7 @@
         </submesh>
     </submeshes>
     <submeshnames>
-        <submesh index="0" name="makehuman:Low-Poly:Eye_brown">
+        <submesh index="0" name="makehuman_Low-Poly_Eye_brown">
         </submesh>
     </submeshnames>
     <skeletonlink name="makehuman_Low-Poly.skeleton"/>

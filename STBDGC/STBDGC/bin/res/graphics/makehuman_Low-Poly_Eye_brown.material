@@ -1,12 +1,12 @@
-// makehuman:Low-Poly:Eye_brown genrated by blender2ogre 0.6.0
+// makehuman_Low-Poly_Eye_brown genrated by blender2ogre 0.6.0
 
-material makehuman:Low-Poly:Eye_brown 
+material makehuman_Low-Poly_Eye_brown 
 {
     receive_shadows on 
 
     technique
     {
-        pass makehuman:Low-Poly:Eye_brown
+        pass makehuman_Low-Poly_Eye_brown
         {
             ambient 1.0 1.0 1.0 0.0
             diffuse 1.0 1.0 1.0 0.0

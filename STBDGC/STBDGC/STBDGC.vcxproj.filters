@@ -40,6 +40,12 @@
     <ClCompile Include="src\LittleBoy.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
+    <ClCompile Include="src\AudioEngine.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Mom.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="bin\plugin.cfg">
@@ -50,15 +56,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\Game.h">
-      <Filter>Fichiers sources</Filter>
-    </ClInclude>
     <ClInclude Include="pch.hpp" />
     <ClInclude Include="include\InputManager.hpp">
       <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Monster.hpp">
-      <Filter>Fichiers sources</Filter>
     </ClInclude>
     <ClInclude Include="3rdParty\BtOgreExtras.h">
       <Filter>Fichiers d%27en-tête</Filter>
@@ -73,6 +73,18 @@
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="include\LittleBoy.hpp">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="include\AudioEngine.hpp">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Game.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Monster.hpp">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Mom.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>

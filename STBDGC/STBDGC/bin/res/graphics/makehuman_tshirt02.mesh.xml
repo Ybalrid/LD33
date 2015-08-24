@@ -4015,7 +4015,7 @@
         </vertexbuffer>
     </sharedgeometry>
     <submeshes>
-        <submesh usesharedvertices="true" use32bitindexes="False" operationtype="triangle_list" material="makehuman:tshirt02:tshirt02Material">
+        <submesh usesharedvertices="true" use32bitindexes="False" operationtype="triangle_list" material="makehuman_tshirt02_tshirt02Material">
             <faces count="1408">
                 <face v2="1" v1="0" v3="2"/>
                 <face v2="2" v1="0" v3="3"/>
@@ -5429,7 +5429,7 @@
         </submesh>
     </submeshes>
     <submeshnames>
-        <submesh index="0" name="makehuman:tshirt02:tshirt02Material">
+        <submesh index="0" name="makehuman_tshirt02_tshirt02Material">
         </submesh>
     </submeshnames>
     <skeletonlink name="makehuman_tshirt02.skeleton"/>

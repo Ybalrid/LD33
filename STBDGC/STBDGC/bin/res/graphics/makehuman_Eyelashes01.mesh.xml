@@ -1255,7 +1255,7 @@
         </vertexbuffer>
     </sharedgeometry>
     <submeshes>
-        <submesh usesharedvertices="true" use32bitindexes="False" operationtype="triangle_list" material="makehuman:Eyelashes01:bodyMaterial">
+        <submesh usesharedvertices="true" use32bitindexes="False" operationtype="triangle_list" material="makehuman_Eyelashes01_bodyMaterial">
             <faces count="368">
                 <face v2="1" v1="0" v3="2"/>
                 <face v2="2" v1="0" v3="3"/>
@@ -1629,7 +1629,7 @@
         </submesh>
     </submeshes>
     <submeshnames>
-        <submesh index="0" name="makehuman:Eyelashes01:bodyMaterial">
+        <submesh index="0" name="makehuman_Eyelashes01_bodyMaterial">
         </submesh>
     </submeshnames>
     <skeletonlink name="makehuman_Eyelashes01.skeleton"/>

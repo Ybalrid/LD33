@@ -1,12 +1,12 @@
-// makehuman:Eyelashes01:bodyMaterial genrated by blender2ogre 0.6.0
+// makehuman_Eyelashes01_bodyMaterial genrated by blender2ogre 0.6.0
 
-material makehuman:Eyelashes01:bodyMaterial 
+material makehuman_Eyelashes01_bodyMaterial 
 {
     receive_shadows on 
 
     technique
     {
-        pass makehuman:Eyelashes01:bodyMaterial
+        pass makehuman_Eyelashes01_bodyMaterial
         {
             ambient 1.0 1.0 1.0 0.0
             diffuse 1.0 1.0 1.0 0.0

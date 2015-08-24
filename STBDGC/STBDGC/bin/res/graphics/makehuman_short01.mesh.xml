@@ -8120,7 +8120,7 @@
         </vertexbuffer>
     </sharedgeometry>
     <submeshes>
-        <submesh usesharedvertices="true" use32bitindexes="False" operationtype="triangle_list" material="makehuman:short01:short01blacksatin">
+        <submesh usesharedvertices="true" use32bitindexes="False" operationtype="triangle_list" material="makehuman_short01_short01blacksatin">
             <faces count="2964">
                 <face v2="1" v1="0" v3="2"/>
                 <face v2="2" v1="0" v3="3"/>
@@ -11090,7 +11090,7 @@
         </submesh>
     </submeshes>
     <submeshnames>
-        <submesh index="0" name="makehuman:short01:short01blacksatin">
+        <submesh index="0" name="makehuman_short01_short01blacksatin">
         </submesh>
     </submeshnames>
     <skeletonlink name="makehuman_short01.skeleton"/>

@@ -1,12 +1,12 @@
-// makehuman:Teeth_Base:teethMaterial genrated by blender2ogre 0.6.0
+// makehuman_Teeth_Base:teethMaterial genrated by blender2ogre 0.6.0
 
-material makehuman:Teeth_Base:teethMaterial 
+material makehuman_Teeth_Base:teethMaterial 
 {
     receive_shadows on 
 
     technique
     {
-        pass makehuman:Teeth_Base:teethMaterial
+        pass makehuman_Teeth_Base:teethMaterial
         {
             ambient 0.6399999856948853 0.6399999856948853 0.6399999856948853 0.0
             diffuse 0.6399999856948853 0.6399999856948853 0.6399999856948853 0.0

@@ -1,12 +1,12 @@
-// makehuman:short01:short01blacksatin genrated by blender2ogre 0.6.0
+// makehuman_short01_short01blacksatin genrated by blender2ogre 0.6.0
 
-material makehuman:short01:short01blacksatin 
+material makehuman_short01_short01blacksatin 
 {
     receive_shadows on 
 
     technique
     {
-        pass makehuman:short01:short01blacksatin
+        pass makehuman_short01_short01blacksatin
         {
             ambient 1.0 1.0 1.0 0.0
             diffuse 1.0 1.0 1.0 0.0
